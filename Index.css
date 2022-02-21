@@ -1,0 +1,87 @@
+body h2
+{
+	text-align: center;
+}
+
+#budget-field
+{
+    background-color: #91e0ff;
+	padding: 16px;
+	margin: 32px auto;
+	width: 500px;
+	max-width: 95%;
+	border-radius: 12px;
+	box-shadow: 0 1px 8px rgba(0,0,0,0.25);
+}
+
+#budgetButton:disabled
+{
+	background-color:#ddb3f8;
+	cursor: not-allowed;
+}
+	
+fieldset legend
+{
+	font-weight: bold;
+}
+
+.budgetDiv
+{
+	display: block;
+}
+
+.budget-input
+{
+	margin: 3px;
+}
+
+.control
+{
+	margin-top: 10px;
+}
+
+.control button
+{
+	font: inherit;
+	cursor: pointer;
+	border: 1px solid #40005d;
+	color: white;
+	background-color: #40005d;
+	border-radius: 6px;
+	padding: 4px 5px;
+}
+		
+#expense-field
+{
+	width : 500px;
+	border : 2px outset pink;
+	background-color : lightpink;
+	padding: 16px;
+	max-width: 95%;
+	border-radius: 12px;
+	box-shadow: 0 1px 8px rgba(0,0,0,0.25);
+}
+
+.expense-input
+{
+	margin-top: 5px;
+}
+
+#budget-table
+{
+	margin : 32px auto;
+	width : 400px;
+	text-align : center;
+	border : 2px outset #1bfacd;
+    background-color : #1bfacd;
+	padding: 16px;
+	max-width: 95%;
+	border-radius: 12px;
+	box-shadow: 0 1px 8px rgba(0,0,0,0.25);
+}
+
+table
+{
+	border: 2px solid black;
+	text-align: center;
+}

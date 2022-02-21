@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css">
+    <title>Budget Management</title>
+</head>
+<body>
+    <h2>Budget Management</h2>
+			
+	<div id="budget-field">
+		<fieldset>
+			<legend>Enter Your Budget</legend>
+			<div class="budgetDiv">
+			<div class="budget-input">
+				<label>Enter Budget :</label> 
+				<input id="inputBudget" type="text">
+			</div>
+			<div class="control">
+				<button id="budgetButton" type="button" onclick="budget()">Load Budget</button>
+			</div>
+			</div>
+		</fieldset>
+	</div>
+			
+	<div id="expense-field">
+		<div id="newExpense">
+			<fieldset>
+				<legend>Expenses</legend>
+				<div class="expense-input">
+					<label>Expense Name :</label>
+					<input id="enteredExpenseName" type="text">
+				</div>
+				<div class="expense-input">
+					<label>Expense Amount :</label>
+					<input id="enteredExpenseAmount" type="text">
+				</div>
+				<div class="control">
+					<button type="button" id="loadExpenseBtn" onclick="expense()">Load Expense</button>
+				</div>
+			</fieldset>
+		</div>
+				
+		<div id="expenseItems">
+			<fieldset>
+				<legend>Expenses Info</legend>
+				<ul id="expenses_info">
+				</ul>
+				</fieldset>
+		</div>
+	</div>
+
+	<div id="budget-table">
+		<table id="mytable" border="2px" align="center">
+			<tr>
+				<th align="center" colspan="4">Budget Table :<output id="totalBudget" type="text"></th>
+			</tr>
+					
+			<tr id="head_row">
+ 				<td>Budget Amt</td>
+				<td>Expense Name</td>
+				<td>Expense Amt</td>
+				<td>Remaining Amt</td>
+			</tr>
+		</table>
+	</div>
+		
+	<script>
+					
+		function budget()
+		{
+			let budget = document.getElementById("inputBudget").value;
+			document.getElementById("totalBudget").value = budget;
+		}
+
+		function expense()
+		{
+			let budget = document.getElementById("inputBudget").value;
+			let inputExpenseName = document.getElementById("enteredExpenseName").value;
+			let inputExpenseAmount = document.getElementById("enteredExpenseAmount").value;
+					
+			let expenseTable = document.getElementById("mytable");
+			//console.log(expenseTable.lastElementChild);
+			
+			if((inputExpenseName.length >0) && (inputExpenseAmount.length > 0) && (budget.length > 0))
+			{
+			
+			let budgetBtn = document.getElementById("budgetButton");
+			budgetBtn.setAttribute('disabled','true');
+			
+			let row = document.createElement("tr");
+			row.setAttribute('id','body_row');
+					
+			var budgetAmount = document.createElement("td");
+			budgetAmount.setAttribute('id','budgetamt');							
+			var expenseName = document.createElement("td");
+			expenseName.setAttribute('id','expensename');						
+			var expenseAmount = document.createElement("td");
+			expenseAmount.setAttribute('id','expenseamt');						
+			var remainingAmount = document.createElement("td");
+			remainingAmount.setAttribute('id','remainingBudgetAmount');
+						
+			row.appendChild(budgetAmount);
+			row.appendChild(expenseName);
+			row.appendChild(expenseAmount);
+			row.appendChild(remainingAmount);
+			expenseTable.appendChild(row);
+								
+			//console.log(row.previousElementSibling.lastElementChild);
+								
+			var previousRow = row.previousElementSibling.lastElementChild;
+								
+			var previousRowId = previousRow.getAttribute('id');
+			//console.log(previousRowId);
+								
+			if(previousRowId == 'head_row')
+			{
+				budgetamt.innerHTML = budget;
+				//console.log(budgetamt.innerHTML);
+				//console.log(budgetamt.value);
+				var remainingBudget = budget - inputExpenseAmount;
+				remainingBudgetAmount.innerHTML = remainingBudget;
+			}
+								 
+			else
+			{
+				budgetAmount.innerHTML = ((row.previousElementSibling.lastElementChild).innerHTML);
+				remainingAmount.innerHTML = budgetAmount.innerHTML - inputExpenseAmount;
+
+				if(remainingAmount.innerHTML < 0)
+				{
+					remainingAmount.innerHTML = "No budget remaining";
+					var btn = document.getElementById("loadExpenseBtn");
+					btn.setAttribute('disabled','true');								
+				}
+				if(remainingAmount.innerHTML == 0)
+				{
+					var btn = document.getElementById("loadExpenseBtn");
+					btn.setAttribute('disabled','true');
+				}
+			}
+				
+			expenseName.innerHTML = inputExpenseName;
+			expenseAmount.innerHTML = inputExpenseAmount;
+													
+			var info = document.getElementById("expenses_info");
+			var li = document.createElement("li");
+			li.innerHTML = inputExpenseName + " : " + inputExpenseAmount;
+			info.appendChild(li);
+			}
+		}
+								
+			</script>
+								
+</body>
+</html>
